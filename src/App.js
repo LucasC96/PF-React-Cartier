@@ -1,13 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-import { Login } from './Login';
+import Home from "./components/Home/Home";
+import CartContent from "./components/CartContent/CartContent";
+import DataProvider from "./components/Context/DataContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-      <h1>Esto es de App </h1>
-    </div>
+    <DataProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<CartContent />} />
+        </Routes>
+      </BrowserRouter>
+    </DataProvider>
   );
 }
 

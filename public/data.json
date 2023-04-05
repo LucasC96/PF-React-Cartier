@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Harry Potter y el prisionero de Azkaban",
+    "author": "J. K. Rowling",
+    "price": 10,
+    "img": "https://http2.mlstatic.com/D_NQ_NP_759296-MLA42289613725_062020-O.webp",
+    "quanty": 1
+  },
+  {
+    "id": 2,
+    "name": "Canción de hielo y fuego 1",
+    "author": "George R. R. Martin",
+    "price": 20,
+    "img": "https://http2.mlstatic.com/D_NQ_NP_779250-MLA30414595995_052019-O.webp",
+    "quanty": 1
+  },
+
+  {
+    "id": 3,
+    "name": "El señor de los anillos",
+    "author": "J. R. R. Tolkien",
+    "price": 27,
+    "img": "https://http2.mlstatic.com/D_NQ_NP_699035-MLA54663861599_032023-O.webp",
+    "quanty": 1
+  },
+  {
+    "id": 4,
+    "name": "La torre oscura",
+    "author": "Stephen King",
+    "price": 18,
+    "img": "https://http2.mlstatic.com/D_NQ_NP_834574-MLA29000531454_122018-O.webp",
+    "quanty": 1
+  }
+]
