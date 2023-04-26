@@ -12,14 +12,13 @@ const CartContent = () => {
 
   return (
     <>
-      <Navbar />
       {cart.length > 0 ? (
         <>
           <CartElements />
           <CartTotal />
         </>
       ) : (
-        <h2 className='cart-message-center'>Your cart is empty</h2>
+        <h2 className="cart-message-center">Your cart is empty</h2>
       )}
     </>
   );
