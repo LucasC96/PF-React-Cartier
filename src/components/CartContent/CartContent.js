@@ -3,7 +3,6 @@ import { dataContext } from "../Context/DataContext";
 
 import CartElements from "./CartElements";
 import CartTotal from "./CartTotal";
-import Navbar from "../Navbar/Navbar";
 
 import "./CartContent.css";
 

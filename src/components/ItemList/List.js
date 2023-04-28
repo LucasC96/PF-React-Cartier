@@ -2,19 +2,37 @@ import { useContext, useState, useEffect } from "react";
 import { dataContext } from "../Context/DataContext";
 import axios from "axios";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import "./Products.css";
+import "./List.css";
 
-const Products = () => {
-  const [data, setData] = useState([]);
+const List = () => {
+  const [items, setItems] = useState([]);
   const { buyProducts } = useContext(dataContext);
+  const { categoryName } = useParams();
+
+  const checkItemCategory = (item) => {
+    if (!categoryName) {
+      return true;
+    }
+    return categoryName === item.category;
+  };
+
+  const filterItems = (responseItems) => {
+    if (!categoryName) {
+      return responseItems;
+    }
+    const filteredItems = responseItems.filter(checkItemCategory);
+    return filteredItems;
+  };
 
   useEffect(() => {
-    axios("productsMock.json").then((res) => setData(res.data));
-  }, []);
+    axios
+      .get("/productsMock.json")
+      .then((res) => setItems(filterItems(res.data)));
+  }, [categoryName]);
 
-  return data.map((product) => {
+  return items.map((product) => {
     return (
       <div className="card" key={product.id}>
         <img src={product.img} alt="img-product-card" />
@@ -31,4 +49,4 @@ const Products = () => {
   });
 };
 
-export default Products;
+export default List;

@@ -5,10 +5,6 @@ import { Link, Outlet } from "react-router-dom";
 import TotalItems from "../CartContent/TotalItems";
 
 import "./Navbar.css";
-import CartItemCounter from "../CartContent/CartItemCounter";
-import ItemListContainer from "../ItemList/ItemListContainer";
-import Products from "../Products/Products";
-import { ItemDetail } from "../ItemDetail/ItemDetail";
 
 const Navbar = () => {
   const { cart } = useContext(dataContext);
