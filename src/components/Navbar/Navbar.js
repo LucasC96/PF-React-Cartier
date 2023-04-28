@@ -15,11 +15,15 @@ const Navbar = () => {
           <Link to="/">
             <h1 className="navbar-logo">Home📚</h1>
           </Link>
-          <ul style={{ display: "flex", gap: "30px" }}>
+          <ul className="navbar-ul">
             <Link to="/">Todos los libros</Link>
+            <p>|</p>
             <Link to="category/Legendarium">Legendarium</Link>
+            <p>|</p>
             <Link to="category/Wizarding World">Wizarding World</Link>
+            <p>|</p>
             <Link to="category/Song of ice and fire">Song of ice and fire</Link>
+            <p>|</p>
             <Link to="category/Dark Tower">Dark Tower</Link>
           </ul>
           <Link className="seeCarrito" to={"/cart"}>

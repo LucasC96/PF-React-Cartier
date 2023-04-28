@@ -28,3 +28,23 @@
   cursor: pointer;
   text-decoration: none;
 }
+
+.navbar-ul {
+  font-size: 22px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+a:link {
+  color: #fff;
+}
+a:visited {
+  color: #fff;
+}
+a:active {
+  color: burlywood;
+}
+
+p {
+  color: #fff;
+}

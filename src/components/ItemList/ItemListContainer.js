@@ -2,7 +2,7 @@ import List from "./List";
 
 const ItemListContainer = () => {
   return (
-    <div>
+    <div className="product-card-container">
       <List />
     </div>
   );
