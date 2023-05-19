@@ -13,17 +13,14 @@ import {
 } from "firebase/firestore";
 
 export const FormCheckoutContainer = () => {
-  const { cart, getTotalPrice, clearCart } = useContext(dataContext);
+  const { cart } = useContext(dataContext);
 
   const [orderId, setOrderId] = useState(null);
 
   const checkoutFn = (data) => {
-    let total = getTotalPrice();
-
     let dataOrder = {
       buyer: data,
       items: cart,
-      total: total,
       date: serverTimestamp(),
     };
 
@@ -35,8 +32,6 @@ export const FormCheckoutContainer = () => {
         stock: product.stock - product.quantity,
       })
     );
-
-    clearCart();
   };
 
   const { handleSubmit, handleChange, errors, values } = useFormik({
