@@ -4,11 +4,12 @@
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 30px;
+  height: 200px;
 }
 
 .cartContent > img {
-  height: 120px;
-  width: 100px;
+  height: 200px;
+  width: 150px;
   text-align: center;
 }
 
@@ -21,18 +22,15 @@
   margin-top: 40px;
 }
 
-/*counter-button*/
 .counter-button {
   cursor: pointer;
   font-weight: bold;
 }
 
-/*delete-button*/
 .cart-delete-button {
   cursor: pointer;
 }
 
-/*total items*/
 .cart-items-total {
   background-color: red;
   color: white;
@@ -42,4 +40,11 @@
   top: 37px;
   right: 14px;
   position: absolute;
+}
+.checkout-button {
+  background-color: #1b1b1b;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 42%;
+  margin-right: 42%;
 }

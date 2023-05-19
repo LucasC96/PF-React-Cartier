@@ -17,13 +17,13 @@ const Navbar = () => {
           </Link>
           <ul className="navbar-ul">
             <Link to="/">Todos los libros</Link>
-            <p>|</p>
+            <p className="navp">|</p>
             <Link to="category/Legendarium">Legendarium</Link>
-            <p>|</p>
+            <p className="navp">|</p>
             <Link to="category/Wizarding World">Wizarding World</Link>
-            <p>|</p>
+            <p className="navp">|</p>
             <Link to="category/Song of ice and fire">Song of ice and fire</Link>
-            <p>|</p>
+            <p className="navp">|</p>
             <Link to="category/Dark Tower">Dark Tower</Link>
           </ul>
           <Link className="seeCarrito" to={"/cart"}>

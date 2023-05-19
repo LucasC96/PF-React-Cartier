@@ -1,8 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { dataContext } from "../Context/DataContext";
-import axios from "axios";
 import { Button } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
+import { db } from "../../firebaseConfig";
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 import "./List.css";
 
@@ -11,26 +12,33 @@ const List = () => {
   const { buyProducts } = useContext(dataContext);
   const { categoryName } = useParams();
 
-  const checkItemCategory = (item) => {
-    if (!categoryName) {
-      return true;
-    }
-    return categoryName === item.category;
-  };
-
-  const filterItems = (responseItems) => {
-    if (!categoryName) {
-      return responseItems;
-    }
-    const filteredItems = responseItems.filter(checkItemCategory);
-    return filteredItems;
-  };
-
   useEffect(() => {
-    axios
-      .get("/productsMock.json")
-      .then((res) => setItems(filterItems(res.data)));
+    let consulta;
+    const itemCollection = collection(db, "products");
+
+    if (categoryName) {
+      const itemCollectionFiltered = query(
+        itemCollection,
+        where("category", "==", categoryName)
+      );
+      consulta = itemCollectionFiltered;
+    } else {
+      consulta = itemCollection;
+    }
+
+    getDocs(consulta)
+      .then((res) => {
+        const products = res.docs.map((product) => {
+          return {
+            ...product.data(),
+            id: product.id,
+          };
+        });
+        setItems(products);
+      })
+      .catch((err) => console.log(err));
   }, [categoryName]);
+  console.log(items);
 
   return items.map((product) => {
     return (
@@ -41,7 +49,7 @@ const List = () => {
         <Button variant="contained" onClick={() => buyProducts(product)}>
           buy
         </Button>
-        <Link to={`/itemDetail/${product.id}`}>
+        <Link to={`/itemDetail/${product.id}`} state={product}>
           <Button variant="contained">Ver Detalle</Button>
         </Link>
       </div>
