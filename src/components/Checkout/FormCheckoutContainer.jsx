@@ -13,14 +13,16 @@ import {
 } from "firebase/firestore";
 
 export const FormCheckoutContainer = () => {
-  const { cart } = useContext(dataContext);
+  const { cart, clearCart, getTotalPrice } = useContext(dataContext);
 
   const [orderId, setOrderId] = useState(null);
 
   const checkoutFn = (data) => {
+    let total = getTotalPrice();
     let dataOrder = {
       buyer: data,
       items: cart,
+      total: total,
       date: serverTimestamp(),
     };
 
@@ -32,25 +34,39 @@ export const FormCheckoutContainer = () => {
         stock: product.stock - product.quantity,
       })
     );
+
+    clearCart();
   };
 
-  const { handleSubmit, handleChange, errors, values } = useFormik({
+  const {
+    handleSubmit,
+    handleChange,
+    errors,
+    values,
+    touched,
+    handleBlur,
+  } = useFormik({
     initialValues: {
       nombre: "",
       email: "",
+      confirmEmail: "",
       phone: null,
     },
     onSubmit: checkoutFn,
     validationSchema: Yup.object().shape({
-      nombre: Yup.string()
-        .required("este campo es obligatorio")
-        .min(3, "el nombre debe tener al menos 3 caracteres")
-        .max(10, "el nombre no puede superar los 10 caracteres"),
-      email: Yup.string()
-        .email("El campo debe ser un email")
-        .required("este campo es obligatorio"),
-      phone: Yup.number().required("este campo es obligatorio"),
-    }),
+          nombre: Yup.string()
+            .required("Este campo es obligatorio")
+            .min(3, "El nombre debe tener al menos 3 caracteres")
+            .max(10, "El nombre no puede superar los 10 caracteres"),
+          email: Yup.string()
+            .email("El campo debe ser un email")
+            .required("Este campo es obligatorio"),
+          confirmEmail: Yup.string()
+            .oneOf([Yup.ref("email"), null], "Los correos electrónicos deben coincidir")
+            .required("Este campo es obligatorio"),
+          phone: Yup.number().required("Este campo es obligatorio"),
+        }),
+      phone: Yup.number().required("Este campo es obligatorio"),
     validateOnChange: false,
   });
 
@@ -58,13 +74,14 @@ export const FormCheckoutContainer = () => {
     <div>
       {orderId ? (
         <h3>
-          Gracias por tu compra el numero de compra es {orderId}, por favor
-          guardalo para cualquier cosa
+          Gracias por su compra, el número de compra es {orderId}, pronto lo contactaremos por correo electrónico.
         </h3>
       ) : (
         <FormCheckout
           errors={errors}
+          touched={touched}
           handleChange={handleChange}
+          handleBlur={handleBlur}
           handleSubmit={handleSubmit}
           values={values}
         />
@@ -72,3 +89,4 @@ export const FormCheckoutContainer = () => {
     </div>
   );
 };
+

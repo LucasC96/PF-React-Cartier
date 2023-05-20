@@ -1,7 +1,11 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 
-const FormCheckout = ({ handleSubmit, handleChange, errors, values }) => {
+const FormCheckout = ({
+  handleSubmit,
+  handleChange,
+  errors,
+}) => {
   return (
     <div style={{ paddingTop: "50px" }}>
       <form action="" onSubmit={handleSubmit}>
@@ -31,6 +35,18 @@ const FormCheckout = ({ handleSubmit, handleChange, errors, values }) => {
             />
           </Grid>
           <Grid item xs={11} sm={7}>
+  <TextField
+    id="outlined-basic"
+    label="Confirmar Email"
+    variant="outlined"
+    fullWidth
+    name="confirmEmail"
+    onChange={handleChange}
+    error={errors.confirmEmail ? true : false}
+    helperText={errors.confirmEmail}
+  />
+</Grid>
+          <Grid item xs={11} sm={7}>
             <TextField
               id="outlined-basic"
               label="Phone"
@@ -54,5 +70,7 @@ const FormCheckout = ({ handleSubmit, handleChange, errors, values }) => {
     </div>
   );
 };
+
+
 
 export default FormCheckout;

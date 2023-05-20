@@ -15,7 +15,18 @@ const DataProvider = ({ children }) => {
     }
   };
 
-  return <dataContext.Provider value={{ cart, setCart, buyProducts }}>{children}</dataContext.Provider>;
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const getTotalPrice = () => {
+    let total = cart.reduce((acc, elemento) => {
+      return acc + elemento.price * elemento.quantity;
+    }, 0);
+    return total;
+  };
+
+  return <dataContext.Provider value={{ cart, setCart, buyProducts, clearCart,getTotalPrice }}>{children}</dataContext.Provider>;
 };
 
 export default DataProvider;
